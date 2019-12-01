@@ -1,11 +1,11 @@
 <img src="https://www.activeledger.io/wp-content/uploads/2018/09/Asset-23.png" alt="Activeledger" width="500"/>
 
 
-# Activeledger SDK-Android
+# Activeledger SDK-Kotlin
 
-To use the Android SDK please Add it in your root build.gradle at the end of repositories:
+To use the Kotlin SDK please Add it in your root build.gradle at the end of repositories:
 
-```Java
+```Kotlin
 allprojects {
 	repositories {
 		maven { url 'https://jitpack.io' }
@@ -15,15 +15,15 @@ allprojects {
 
 Add the dependency
 
-```Java
+```Kotlin
 dependencies {
-	implementation 'com.github.activeledger:SDK-Android:Tag'
+	implementation 'com.github.activeledger:SDK-Kotlin:Tag'
 }
 ```
 
 For Maven:
 
-```Java
+```Kotlin
 <repositories>
 	<repository>
 		<id>jitpack.io</id>
@@ -34,10 +34,10 @@ For Maven:
 
 Add the dependency
 
-```Java
+```Kotlin
 <dependency>
 	<groupId>com.github.activeledger</groupId>
-	<artifactId>SDK-Android</artifactId>
+	<artifactId>SDK-Kotlin</artifactId>
 	<version>Tag</version>
 </dependency>
 ```
@@ -50,30 +50,30 @@ Use the ActiveLedger SDK interface to Use the SDK.
 
 ## Initialise the SDK
 
-```Java
-ActiveLedgerSDK.getInstance().initSDK(this,"protocol","URL","port");
+```Kotlin
+ActiveLedgerSDK.getInstance().initSDK(this,"protocol","URL","port")
 Example:
-ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","5260");
+ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","5260")
 ```
 
 ## Generate KeyPair
 
-Generating a KeyPair will give an Observable in return. User RxAndroid to subscribe to the Obserable.
+Generating a KeyPair will give an Observable in return. User RxJava to subscribe to the Obserable.
 
-```Java
-Observable<KeyPair> keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(KeyType,SaveKeysToFile);
+```Kotlin
+val keyPair: Observable<KeyPair> = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(KeyType,SaveKeysToFile)
 Example:
-Observable<KeyPair> keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
+val keyPair: Observable<KeyPair> = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true)
 ```
 
 ## Oboard KeyPair
 
-Onboarding a KeyPair will give an Observable in return. User RxAndroid to subscribe to the Obserable.
+Onboarding a KeyPair will give an Observable in return. User RxJava to subscribe to the Obserable.
 
-```Java
-Observable<String> response = ActiveLedgerSDK.getInstance().onBoardKeys(KeyPair, "KeyName");
+```Kotlin
+val response: Observable<KeyPair> = ActiveLedgerSDK.getInstance().onBoardKeys(KeyPair, "KeyName")
 Example:
-ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, "ActiveLedgerAwesomeKey");
+ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, "ActiveLedgerAwesomeKey")
 ```
 
 ## Creating and Signing Transaction
@@ -81,8 +81,8 @@ ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, "ActiveLedgerAwesomeKey");
 Transactions can be created using Transactions class in the SDK. User can create complete transaction or just the $tx Object and SDK will create the complete transaction. User can also create Labeled Transaction using the example below. 
 $tx is a JSONObject that can be created by folowing Activeledger Documentation.
 
-```Java
-JSONObject transaction = Transactions.createLabeledTransaction($tx);
+```Kotlin
+transaction: JSONObject = Transactions.createLabeledTransaction($tx)
 ```
 
 ## Server Sent Event
@@ -90,16 +90,16 @@ JSONObject transaction = Transactions.createLabeledTransaction($tx);
 Server Sent Events can be subscribed by giving the protocol, ip and port. All the functional URLs can be found in Utility/ApiURL.
 User can create  their own ServerEventListener and observe the events or can pass null and Observe the LiveData variable "SSEUtil.getInstance().eventLiveData".
 
-```Java
-ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip, port, url, null/ServerEventListener);
+```Kotlin
+ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip, port, url, null/ServerEventListener)
 ```
 
 ## Executing a Transaction
 
-Execute method takes a transaction and will give an Observable in return with response in String format. User RxAndroid to subscribe to the Obserable.
+Execute method takes a transaction and will give an Observable in return with response in String format. User RxJava to subscribe to the Obserable.
 
-```Java
-Observable<String>  respinse =  ActiveLedgerSDK.getInstance().executeTransaction(String transactionJson);
+```Kotlin
+response: Observable<String> =  ActiveLedgerSDK.getInstance().executeTransaction(String transactionJson)
 ```
 
 
@@ -107,5 +107,5 @@ Observable<String>  respinse =  ActiveLedgerSDK.getInstance().executeTransaction
 
 ---
 
-This project is licensed under the [MIT](https://github.com/activeledger/SDK-Android/blob/master/LICENSE) License
+This project is licensed under the [MIT](https://github.com/activeledger/SDK-Kotlin/blob/master/LICENSE) License
 
